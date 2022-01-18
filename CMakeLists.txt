@@ -5,3 +5,6 @@ project(cpen VERSION 1.0)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(src)
+
+set(CPACK_GENERATOR "TGZ")
+include(CPack)
