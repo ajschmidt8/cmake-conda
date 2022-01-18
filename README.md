@@ -28,3 +28,13 @@
 - `cmake --build build --target package`
 - `cmake --install build --prefix .`
 - `sudo cmake --install build`
+
+## Next Section
+
+- Building a `conda` package
+
+### Commands
+
+- `conda activate fireside`
+- `conda build recipe`
+- `conda install --use-local helloworld`
