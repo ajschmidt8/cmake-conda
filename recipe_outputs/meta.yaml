@@ -1,0 +1,28 @@
+package:
+  name: libcudf-split
+  version: 3.0.0
+
+source:
+  path: ../
+
+outputs:
+  - name: libcudf
+    version: 3.0.0
+    script: install_libcudf.sh
+    build:
+      script_env: &script_env
+        - SOME_CMAKE_VAR=1234
+    requirements:
+      host:
+        # `libpng` is moved back to the individual pkg which depends on it
+        # so that it can be used to link against during the build and also
+        # add the necessary `run_exports` dependencies
+        - libpng
+  - name: libcudf_tests
+    version: 3.0.0
+    script: install_libcudf_tests.sh
+    build:
+      script_env: *script_env
+    requirements:
+      host:
+        - "{{ pin_subpackage('libcudf', exact=True) }}"

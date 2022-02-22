@@ -1,0 +1,15 @@
+package:
+  name: libcudf
+  version: 1.0.0
+
+source:
+  path: ../
+
+build:
+  script_env:
+    - SOME_CMAKE_VAR=1234
+
+requirements:
+  host:
+    # `libpng` has a run_export, which also adds a runtime dependency for `libcudf` pkg.
+    - libpng

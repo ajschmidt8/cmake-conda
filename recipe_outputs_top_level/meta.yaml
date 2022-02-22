@@ -1,0 +1,29 @@
+package:
+  name: libcudf-split
+  version: 2.0.0
+
+source:
+  path: ../
+
+build:
+  script_env:
+    - SOME_CMAKE_VAR=1234
+
+requirements:
+  host:
+    # `libpng` has a run_export, which also adds a runtime dependency for `libcudf` pkg.
+    # When `libpng` is moved to the top-level of a multi-output recipe, it no longer adds a runtime
+    # dependency for the `libcudf` package in the `outputs` section. However, it's required here for the top-level build
+    # to link against.
+    - libpng
+
+outputs:
+  - name: libcudf
+    version: 2.0.0
+    script: install_libcudf.sh
+  - name: libcudf_tests
+    version: 2.0.0
+    script: install_libcudf_tests.sh
+    requirements:
+      host:
+        - "{{ pin_subpackage('libcudf', exact=True) }}"
